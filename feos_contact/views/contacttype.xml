@@ -1,0 +1,17 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="contact_type_view">
+			<field name="name">contacttype.form</field>
+			<field name="model">feos.contacttype</field>
+			<field name="arch" type="xml">
+				<form string="Type Form">
+					<sheet>
+						<group>
+							<field name="name" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="partner_contact_view">
+			<field name="name">feos_contactt</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<notebook position="inside">
+					<page string="Contact">
+						<field name="contact_ids"/> 
+					</page>
+				</notebook>
+			</field>
+		</record>
+	</data>
+</odoo>
