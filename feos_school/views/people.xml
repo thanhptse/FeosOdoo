@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="people_instructor_form_view">
+			<field name="name">people.instructor</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<field name="category_id" position="after">
+					<field name="type_people"/>
+				</field>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="people_list_action">
+			<field name="name">Peoples</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem id="people_menu" name="Peoples" parent="school_menu"
+			action="people_list_action" />
+	</data>
+</odoo>

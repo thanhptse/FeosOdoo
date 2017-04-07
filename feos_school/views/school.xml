@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="grade_form_view">
+			<field name="name">grade.form</field>
+			<field name="model">school.grade</field>
+			<field name="arch" type="xml">
+				<form string="Grade Form">
+					<sheet>
+						<group>
+							<field name="name" />
+						</group>
+						<notebook>
+							<page string="Description">
+								<field name="description" />
+							</page>
+							<page string="Classes">
+								<field name="class_ids" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- override the automatically generated list view for courses -->
+		<record model="ir.ui.view" id="grade_tree_view">
+			<field name="name">grade.tree</field>
+			<field name="model">school.grade</field>
+			<field name="arch" type="xml">
+				<tree string="Grade Tree">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+		<!-- window action -->
+		<!-- The following tag is an action definition for a "window action", that 
+			is an action opening a view or a set of views -->
+		<record model="ir.actions.act_window" id="grade_list_action">
+			<field name="name">Grades</field>
+			<field name="res_model">school.grade</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Create the first grade
+				</p>
+			</field>
+		</record>
+		<!-- top level menu: no parent -->
+		<menuitem id="main_school_menu" name="Feos School" />
+		<!-- A first level in the left side menu is needed before using action= 
+			attribute -->
+		<menuitem id="school_menu" name="Feos School" parent="main_school_menu" />
+		<!-- the following menuitem should appear *after* its parent openacademy_menu 
+			and *after* its action course_list_action -->
+		<menuitem id="grade_menu" name="Grades" parent="school_menu"
+			action="grade_list_action" />
+		<!-- Full id location: action="openacademy.course_list_action" It is not 
+			required when it is the same module -->
+		<record model="ir.ui.view" id="class_form_view">
+			<field name="name">class.form</field>
+			<field name="model">school.class</field>
+			<field name="arch" type="xml">
+				<form string="Class Form">
+					<sheet>
+						<group>
+							<group>
+								<field name="grade_id"/>
+								<field name="name"/>
+								<field name="start_date"/>
+								<field name="quantity" readonly="True"/>
+							</group>
+						</group>
+						<field name="student_ids" widget="many2many" domain="[('type','=','student'),('class_id','=',False)]"/>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- class tree/list view -->
+		<record model="ir.ui.view" id="class_tree_view">
+			<field name="name">class.tree</field>
+			<field name="model">school.class</field>
+			<field name="arch" type="xml">
+				<tree string="Class Tree">
+					<field name="name" />
+					<field name="grade_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="class_list_action">
+			<field name="name">Classes</field>
+			<field name="res_model">school.class</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Create the first class
+				</p>
+			</field>
+		</record>
+		<menuitem id="class_menu" name="Classes" parent="school_menu"
+			action="class_list_action" />
+	</data>
+</odoo>
