@@ -8,6 +8,7 @@
 			<field name="arch" type="xml">
 				<field name="category_id" position="after">
 					<field name="type_people"/>
+					<field name="class_id"/>
 				</field>
 			</field>
 		</record>

@@ -17,19 +17,18 @@ class Class(models.Model):
     start_date = fields.Date(default=fields.Date.today)
     grade_id = fields.Many2one('school.grade',ondelete='cascade', string="Grade", required=True)
     student_ids = fields.One2many('res.partner', 'class_id', string="Students")
-    quantity = fields.Integer()
+    quantity = fields.Integer(string="Quantity", compute='_onchange_quantity', store=True)
     #male_student_ids = fields.One2many('res.partner', 'class_id', string="Male Students",domain=[('sex','=','male')])
     #female_student_ids = fields.One2many('res.partner', 'class_id', string="FeMale Students",domain=[('sex','=','female')])
     
     taken_seats = fields.Float(string="Taken seats")
     
+    @api.multi
     @api.depends('student_ids')
-    def _add_new_student(self):
+    def _onchange_quantity(self):
         for r in self:
-            if not r.student_ids:
-                r.quantity = 0
-            else:
-                r.quantity = len(r.student_ids)
+            print '_onchange_quantity: ', len(r.student_ids),r.student_ids
+            r.quantity = len(r.student_ids)
         
         
         
