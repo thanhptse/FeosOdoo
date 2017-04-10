@@ -2,7 +2,7 @@
 	<data>
 		<record model="ir.ui.view" id="contact_type_view">
 			<field name="name">contacttype.form</field>
-			<field name="model">feos.contacttype</field>
+			<field name="model">feos.contact.type</field>
 			<field name="arch" type="xml">
 				<form string="Type Form">
 					<sheet>

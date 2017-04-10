@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="book_form_view">
+			<field name="name">book.form</field>
+			<field name="model">library.book</field>
+			<field name="arch" type="xml">
+				<form string="Book Form">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="author_ids" widget="many2many_tags" />
+						</group>
+						<group>
+							<field name="date_release" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- Search View -->
+		<record model="ir.ui.view" id="book_search_view">
+			<field name="name">book.search</field>
+			<field name="model">library.book</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="author_ids" />
+					<filter string="No Authors" domain="[('author_ids','=',False)]" />
+				</search>
+			</field>
+		</record>
+		<!-- Tree view -->
+		<record model="ir.ui.view" id="book_tree_view">
+			<field name="name">book.tree</field>
+			<field name="model">library.book</field>
+			<field name="arch" type="xml">
+				<tree string="Book Tree">
+					<field name="name" />
+					<field name="date_release" />
+				</tree>
+			</field>
+		</record>
+		<!-- window action -->
+		<record model="ir.actions.act_window" id="book_list_action">
+			<field name="name">Books</field>
+			<field name="res_model">library.book</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Create the first book</p>
+			</field>
+		</record>
+		<menuitem id="main_library_menu" name="Library Book" />
+		<menuitem id="library_menu" name="Library Book" parent="main_library_menu" />
+		<menuitem id="books_menu" name="Books" parent="library_menu" action="book_list_action" />
+	</data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

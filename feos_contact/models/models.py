@@ -7,20 +7,18 @@ class Partner(models.Model):
     
     contact_ids = fields.One2many('feos.contact', 'partner_id', string="Contacts")
 
+class ContactType(models.Model):
+    _name = 'feos.contact.type'
+    
+    name = fields.Char(required=True)
+
 class Contact(models.Model):
     _name = 'feos.contact'
     
     value = fields.Char(required=True)    
-    partner_id = fields.Many2one('res.partner', ondelete='cascade', string="Partner", required=True, default=lambda self: self.env.uid)
+    partner_id = fields.Many2one('res.partner', ondelete='cascade', string="Partner", required=True, default=lambda self: self.env.user.partner_id)
+    type_contact_id = fields.Many2one('feos.contact.type', string="Type", required=True)
     
-    type = fields.Many2one('foes.contacttype', string="Type", required=True)
-    
-class Type(models.Model):
-    _name = 'feos.contacttype'
-    
-    name = fields.Char(required=True)
-    
-    contact_ids = fields.One2many('feos.contact', 'type', string="Types")
     
     
     

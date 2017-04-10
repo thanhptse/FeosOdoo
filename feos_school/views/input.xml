@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+	<record model="ir.ui.view" id="input_form_view">
+		<field name="name">input.form</field>
+		<field name="model">school.input</field>
+		<field name="arch" type="xml">
+			<form string="Input Form">
+				<sheet>
+					<group>
+						<field name="subject_id"/>
+						<field name="student_id"/>
+						<field name="value"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<!-- input tree -->
+	<record model="ir.ui.view" id="input_tree_view">
+		<field name="name">input.tree</field>
+		<field name="model">school.input</field>
+		<field name="arch" type="xml">
+			<tree string="Input Tree">
+				<field name="subject_id"/>
+				<field name="student_id"/>
+				<field name="value"/>
+			</tree>
+		</field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="input_list_action">
+		<field name="name">Inputs</field>
+		<field name="res_model">school.input</field>
+		<field name="view_mode">tree,form</field>		
+	</record>
+	<menuitem id="input_menu" name="Inputs" parent="school_menu" action="input_list_action"/>
+</data>
+</odoo>

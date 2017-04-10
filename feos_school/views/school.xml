@@ -33,8 +33,7 @@
 			</field>
 		</record>
 		<!-- window action -->
-		<!-- The following tag is an action definition for a "window action", that 
-			is an action opening a view or a set of views -->
+		<!-- The following tag is an action definition for a "window action", that is an action opening a view or a set of views -->
 		<record model="ir.actions.act_window" id="grade_list_action">
 			<field name="name">Grades</field>
 			<field name="res_model">school.grade</field>
@@ -47,15 +46,11 @@
 		</record>
 		<!-- top level menu: no parent -->
 		<menuitem id="main_school_menu" name="Feos School" />
-		<!-- A first level in the left side menu is needed before using action= 
-			attribute -->
+		<!-- A first level in the left side menu is needed before using action= attribute -->
 		<menuitem id="school_menu" name="Feos School" parent="main_school_menu" />
-		<!-- the following menuitem should appear *after* its parent openacademy_menu 
-			and *after* its action course_list_action -->
-		<menuitem id="grade_menu" name="Grades" parent="school_menu"
-			action="grade_list_action" />
-		<!-- Full id location: action="openacademy.course_list_action" It is not 
-			required when it is the same module -->
+		<!-- the following menuitem should appear *after* its parent openacademy_menu and *after* its action course_list_action -->
+		<menuitem id="grade_menu" name="Grades" parent="school_menu" action="grade_list_action" />
+		<!-- Full id location: action="openacademy.course_list_action" It is not required when it is the same module -->
 		<record model="ir.ui.view" id="class_form_view">
 			<field name="name">class.form</field>
 			<field name="model">school.class</field>
@@ -64,13 +59,13 @@
 					<sheet>
 						<group>
 							<group>
-								<field name="grade_id"/>
-								<field name="name"/>
-								<field name="start_date"/>
-								<field name="quantity" readonly="True"/>
+								<field name="grade_id" />
+								<field name="name" />
+								<field name="start_date" />
+								<field name="quantity" readonly="True" />
 							</group>
 						</group>
-						<field name="student_ids" widget="many2many" domain="[('type','=','student'),('class_id','=',False)]"/>
+						<field name="student_ids" widget="many2many" domain="[('type','=','student'),('class_id','=',False)]" />
 					</sheet>
 				</form>
 			</field>
@@ -98,7 +93,71 @@
 				</p>
 			</field>
 		</record>
-		<menuitem id="class_menu" name="Classes" parent="school_menu"
-			action="class_list_action" />
+		<menuitem id="class_menu" name="Classes" parent="school_menu" action="class_list_action" />
+
+		<record model="ir.ui.view" id="wizard_form_view">
+			<field name="name">wizard.form</field>
+			<field name="model">school.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Add to Class">
+					<group>
+						<field name="student_id"/>
+						<field name="grade_ids"/>
+					</group>
+					<footer>
+						<button name="subscribe" type="object" string="Subcribe" class="oe_hightlight"/>
+						or
+						<button special="cancel" string="Cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<act_window id="launch_student_wizard"
+					name="Add to Class"
+					src_model="res.partner"
+					res_model="school.wizard"
+					view_mode="form"
+					target="new"
+					key2="client_action_multi"/>
 	</data>
 </odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
