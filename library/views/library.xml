@@ -9,10 +9,20 @@
 					<sheet>
 						<group>
 							<field name="name" />
+							<field name="short_name" />
 							<field name="author_ids" widget="many2many_tags" />
 						</group>
 						<group>
+
+							<field name="cover_medium" class="oe_avatar" widget="image" modifiers="{}"/>
+						</group>
+						<group>
+							<field name="retail_price" />
+							<field name="cost_price" />
+						</group>
+						<group>
 							<field name="date_release" />
+							<field name="age_days" />
 						</group>
 					</sheet>
 				</form>
@@ -38,6 +48,11 @@
 				<tree string="Book Tree">
 					<field name="name" />
 					<field name="date_release" />
+					<field name="short_name" />
+					<field name="out_of_print" />
+					<field name="reader_rating" />
+					<field name="cost_price" />
+					<field name="retail_price" />
 				</tree>
 			</field>
 		</record>
