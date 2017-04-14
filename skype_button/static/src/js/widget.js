@@ -12,23 +12,15 @@ odoo.define('web.web_widget_color', function(require) {
 	var FieldSkype = widget.FieldChar.extend({
 		template: 'FieldSkype',
 		prefix: 'skype',
-		clickable: true,
 		
 		start: function() {
-			console.log('start function');
 			this._super.apply(this, arguments);
 			
 	    },
 	    render_value: function() {
-	    	console.log('render function')
 	    	this._super();
-	    	if(this.get("effective_readonly") && this.clickable){
-	    		console.log('trong if');
+	    	if(this.get("effective_readonly")){
 	    		this.$el.attr('href', this.prefix + ':' + this.get('value') + '?'+(this.options.type || 'call'));
-	    	}else{
-	    		console.log('ngoai if');
-	    		console.log(this.get("effective_readonly"))
-	    		console.log(this.clickable)
 	    	}
 	    }
 	});
