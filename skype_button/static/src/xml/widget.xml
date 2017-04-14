@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
-	<t t-name="FieldSkype">
-		<t t-if="!widget.get('effective_readonly')">
-			<input type="text" />
-		</t>
-		<t t-if="widget.get('effective_readonly')">
-			<!-- <t t-jquery="span:first>a">
-				this.attr('target', '_self')
-				<span>Hello</span>
-			</t>-->
-			<t t-jquery="ul" t-operation="append">
-				<input type="text" value="{{widget.get('value')}}"></input>
-			</t> 
+	<t t-name="FieldSkype" t-extend="FieldEmail">
+		<t t-jquery="span" t-operation="replace">
+			<t t-if="widget.get('effective_readonly')">
+				<a t-if="widget.clickable" class="o_form_uri o_text_overflow" href="#" target="_blank" />
+				<span t-if="!widget.clickable" class="o_text_overflow"/>
+			</t>
 		</t>
 	</t>
 </templates>

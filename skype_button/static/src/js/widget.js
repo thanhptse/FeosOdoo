@@ -11,33 +11,25 @@ odoo.define('web.web_widget_color', function(require) {
 	
 	var FieldSkype = widget.FieldChar.extend({
 		template: 'FieldSkype',
+		prefix: 'skype',
+		clickable: true,
+		
 		start: function() {
 			console.log('start function');
-	        this._super();
-	        var $button = this.$el.find('button');
-	        $button.click(this.on_button_clicked);
-	        this.setupFocus($button);
+			this._super.apply(this, arguments);
+			
 	    },
 	    render_value: function() {
-	    	console.log('render function');
-	        if (!this.get("effective_readonly")) {
-	            this._super();
-	        } else {
-	            this.$el.find('a')
-	                    .attr('href', this.skype_uri())
-	                    .text(this.get('value') || '');
-	        }
-	        console.log(this.get('value'))
-	    },
-		skype_uri:function(){
-			return 'skype:' + this.get('value') + '?'+(this.options.type || 'chat') + (this.options.video?'&video=true':'') + (this.options.topic?'&topic='+encodeURIComponent(this.options.topic):'');
-		},
-	    on_button_clicked: function() {
-	        if (!this.get('value') || !this.is_syntax_valid()) {
-	            this.do_warn(_t("Skype Error"), _t("Can't skype to invalid skype address"));
-	        } else {
-	            location.href = this.skype_uri()
-	        }
+	    	console.log('render function')
+	    	this._super();
+	    	if(this.get("effective_readonly") && this.clickable){
+	    		console.log('trong if');
+	    		this.$el.attr('href', this.prefix + ':' + this.get('value') + '?'+(this.options.type || 'call'));
+	    	}else{
+	    		console.log('ngoai if');
+	    		console.log(this.get("effective_readonly"))
+	    		console.log(this.clickable)
+	    	}
 	    }
 	});
 	core.form_widget_registry.add('skype', FieldSkype);
