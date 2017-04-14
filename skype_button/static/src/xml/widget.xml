@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<t t-name="FieldSkype">
+		<t t-if="!widget.get('effective_readonly')">
+			<input type="text" />
+		</t>
+		<t t-if="widget.get('effective_readonly')">
+			<!-- <t t-jquery="span:first>a">
+				this.attr('target', '_self')
+				<span>Hello</span>
+			</t>-->
+			<t t-jquery="ul" t-operation="append">
+				<input type="text" value="{{widget.get('value')}}"></input>
+			</t> 
+		</t>
+	</t>
+</templates>

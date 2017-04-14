@@ -56,6 +56,56 @@ openerp.oepetstore = function(instance, local) {
 	        });
 	    },
 	});
+	
+	local.FieldColor = instance.web.form.AbstractField.extend({
+		events:{
+			'change input': function(e){
+				if(!this.get('effective_readonly')){
+					this.internal_set_value($(e.currentTarget).val());
+				}
+			}
+		},
+		init: function(){
+			this._super.apply(this, arguments);
+			this.set("value", "");
+		},
+		start: function(){
+			this.on("change:effective_readonly", this, function(){
+				this.display_field();
+				this.render_value();
+			});
+			this.display_field();
+			return this._super();
+		},
+		display_field: function(){
+			this.$el.html(QWeb.render("FieldColor",{widget: this}));
+		},
+		render_value: function(){
+			if(this.get("effective_readonly")){
+				this.$(".oe_field_color_content").css("background-color", this.get("value") || "#FFFFFF");
+			}else{
+				this.$("input").val(this.get("value") || "#FFFFFF");
+			}
+		},
+	});
+	instance.web.form.widgets.add('color', 'instance.oepetstore.FieldColor');
+	
+	local.WidgetCoordinates = instance.web.form.FormWidget.extend({
+		start: function(){
+			this._super();
+			this.field_manager.on("field_changed:provider_latitude", this, this.display_map);
+			this.field_manager.on("field_changed:provider_longitude", this, this.display_map);
+			this.display_map();
+		},
+		display_map: function(){
+			this.$el.html(QWeb.render("WidgetCoordinates", {
+				"latitude": this.field_manager.get_field_value("provider_latitude") || 0,
+				"longitude": this.field_manager_get_field_value("provider_longitude") || 0,
+			}));
+		}
+	});
+	
+	instance.web.form.custom_widgets.add('coordinates', 'instance.oepetstore.WidgetCoordinates');
 }
 
 

@@ -10,6 +10,7 @@
 						<group>
 							<field name="name" />
 							<field name="responsible_id" />
+							<field name="color" widget="color"/>
 						</group>
 					</sheet>
 				</form>
