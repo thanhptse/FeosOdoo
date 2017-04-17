@@ -2,16 +2,82 @@
 <odoo>
 	<data>
 		<record model="ir.ui.view" id="parner_sky_form_view">
-			<field name="name">res.parner.form.skype</field>
+			<field name="name">res.partner.form.skype</field>
 			<field name="model">res.partner</field>
 			<field name="inherit_id" ref="base.view_partner_form" />
 			<field name="arch" type="xml">
 				<data>
 					<xpath expr="//field[@name='email']" position="after">
-						<field name="skype" widget="skype" />
+						<field name="skype" widget="skypebutton" />
 					</xpath>
 				</data>
 			</field>
 		</record>
+
+		<record id="partner_sky_tree_view" model="ir.ui.view">
+			<field name="name">res.partner.tree.skype</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_tree" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='email']" position="after">
+					<field name="skype" widget="skypebutton" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="partner_rating_view_form" model="ir.ui.view">
+			<field name="name">res.partner.form.rating</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<data>
+					<xpath expr="//field[@name='email']" position="after">
+						<field name="rating" widget="rating" />
+					</xpath>
+				</data>
+			</field>
+		</record>
+
+		<record id="partner_rating_tree_view" model="ir.ui.view">
+			<field name="name">res.partner.tree.rating</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_tree" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='email']" position="after">
+					<field name="rating" widget="rating" />
+				</xpath>
+			</field>
+		</record>
+
+		<!-- PRINT BUTTON -->
+		<record model="ir.actions.act_window" id="action_list_action">
+			<field name="name">Actions</field>
+			<field name="res_model">feos.printing</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Create the first action
+				</p>
+			</field>
+		</record>
+
+
+		<menuitem id="main_print_menu" name="Print Function" />
+		<menuitem id="print_menu" name="Print Function" parent="main_print_menu" />
+		<menuitem id="action_menu" name="Action" parent="print_menu" action="action_list_action" />
+		
+		<record model="ir.ui.view" id="session_form_view">
+            <field name="name">printing.form</field>
+            <field name="model">feos.printing</field>
+            <field name="arch" type="xml">
+                <form string="Print Form">               	
+                    <sheet>
+                        <group>
+                            <field name="number" widget="printing"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 	</data>
 </odoo>

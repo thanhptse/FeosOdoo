@@ -6,6 +6,12 @@ class skype_button(models.Model):
     _inherit = 'res.partner'
     
     skype = fields.Char(string='Skype name', size=128)
+    rating = fields.Float(string='Rating')
+
+class print_button(models.Model):
+    _name = "feos.printing"
+    
+    number = fields.Float(string="Click to print")
 
 # class skype_button(models.Model):
 #     _name = 'skype_button.skype_button'

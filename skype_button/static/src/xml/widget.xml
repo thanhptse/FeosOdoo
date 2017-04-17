@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<templates>
-	<t t-name="FieldSkype" t-extend="FieldEmail">
+<templates xml:space="preserve">
+	<!-- <t t-name="FieldSkype" t-extend="FieldEmail">
 		<t t-jquery="span" t-operation="replace">
 			<t t-if="widget.get('effective_readonly')">
 				<a class="o_form_uri o_text_overflow" href="#" target="_blank" />
 			</t>
 		</t>
+	</t> -->
+	<t t-name="SkypeButtonWidget">
+		<t t-if="widget.get('effective_readonly')">
+			<div>
+				<span>
+					<div class="oe_skype_button" t-att-id="widget.get('id')" />
+				</span>
+			</div>
+		</t>
+		<t t-if="!widget.get('effective_readonly')">
+			<input type="text" t-att-value="widget.get('value')" />
+		</t>
 	</t>
+	<tr t-extend="ListView.row">
+	
+        <t t-jquery="t td t" t-operation="replace">
+        	<t t-if="!column.widget">
+        		<t t-raw="render_cell(record, column)" />
+        	</t>
+        	
+	        <t t-if="(column.widget =='skypebutton') and (record.attributes.skype_name)">
+	        	<div class="oe_skype_button" t-attf-id="SkypeButton_Call_{{record.attributes.skype_name}}">
+	        		<t t-js="ctx">
+	        			setTimeout(function(){
+		        			Skype.ui({
+							 "name": "call",
+							 "element": "SkypeButton_Call_" + ctx.record.attributes.skype_name,
+							 "participants": [ctx.record.attributes.skype_name],
+							 "imageSize": 32
+							 });
+	        			},1500);
+	        		</t>
+	        	</div>
+	        </t>
+        </t>
+    </tr>
+
+	<t t-name="RatingWidget">
+		<t t-if="widget.get('effective_readonly')">
+			<t t-js="ctx">
+		        	console.log("widget.get effective_readonly")
+		    </t>
+			<div>
+				<span>
+				<t t-foreach="widget.get('value')" t-as="i">
+					<img t-att-src="'https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/star-16.png'" />	    
+				</t>
+					<!-- <div class="oe_rating_button" t-att-id="widget.get('id')" /> -->
+				</span>
+			</div>
+		</t>
+		<t t-if="!widget.get('effective_readonly')">
+			<input type="text" t-att-value="widget.get('value')" />
+		</t>
+	</t>
+
+	<tr t-extend="ListView.row">
+		<t t-jquery="t td t" t-operation="replace">
+			<t t-if="!column.widget">
+	        	<t t-raw="render_cell(record, column)" />
+	        </t>
+	        <t t-if="(column.widget =='rating') and (record.attributes.rating)">
+	        	<t t-js="ctx">
+		        	console.log("rating widget")
+		        </t>
+		    </t>
+	    </t>
+	</tr>
+	
+	<!-- Print Button -->
+	<t t-name="PrintingWidget">
+		<t t-if="widget.get('effective_readonly')">
+			<t t-js="ctx">
+		        	console.log("widget.get effective_readonly")
+		    </t>
+		</t>
+		<t t-if="!widget.get('effective_readonly')">
+			<span>
+				
+				<a class="o_form_uri o_text_overflow" href="#" target="_blank" ><img t-att-src="'https://cdn1.iconfinder.com/data/icons/technology-and-hardware-2/200/vector_66_15-128.png'" /></a>
+			</span>
+			<!-- <input type="text" t-att-value="widget.get('value')" /> -->
+		</t>
+	</t>
+	<tr t-extend="ListView.row">
+		<t t-jquery="t td t" t-operation="replace">
+			<t t-if="!column.widget">
+	        	<t t-raw="render_cell(record, column)" />
+	        </t>
+	        <t t-if="(column.widget =='printing') and (record.attributes.printing)">
+	        	<t t-js="ctx">
+		        	console.log("printing widget")
+		        </t>
+		    </t>
+	    </t>
+	</tr>
 </templates>
